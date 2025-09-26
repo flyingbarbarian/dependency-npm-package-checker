@@ -3,9 +3,10 @@ TARGET_FILE="./package-lock.json"
 PATTERN_FILE="./list.txt"
 
 while read pattern; do
-  if grep -il "$pattern" "$TARGET_FILE";  then
-    echo "$patternが$TARGET_FILEに含まれています。"
+  if grep -iq "$pattern" "$TARGET_FILE";  then
+    echo "[WARNING!!] your project depends on $pattern"
   else
-    echo "$patternは含まれていません"
+    true
+    # echo "your project does not depends on $pattern"
   fi
 done < "$PATTERN_FILE"
